@@ -1,0 +1,21 @@
+Problem 1 GUI Elements:
+
+Canvas where squares and numbers are drawn
+Text Area showing steps to completion
+
+Start temperature input
+End temperature input
+
+Generate random arrangement button
+Solve puzzle button
+
+
+
+Design outline:
+
+Current state -> examine each possible move
+	The heuristic used is total number of places each number is away from its intended position
+	Choose the move that minimizes the value
+	IF no choice minimizes the value THEN
+		choose 
+		

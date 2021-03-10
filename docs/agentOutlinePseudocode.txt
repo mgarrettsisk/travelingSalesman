@@ -5,6 +5,8 @@ Text Area showing steps to completion
 
 Start temperature input
 End temperature input
+Temperature Decrement
+Iterations per decrement
 
 Generate random arrangement button
 Solve puzzle button
@@ -13,9 +15,22 @@ Solve puzzle button
 
 Design outline:
 
-Current state -> examine each possible move
+Current state -> examine each possible move (this is the iteration number)
 	The heuristic used is total number of places each number is away from its intended position
-	Choose the move that minimizes the value
+	IF move doesn't reduce the value
 	IF no choice minimizes the value THEN
-		choose 
+		IF random number between 0 and 1 is greater than e^-Delta/T
+			Then reject the bad move
+		ELSE
+			Accept the bad move
+	THEN
+		Accept all good moves
+
+Then decrement the temperature (the initial, final, and decrement values provided)
+
+ 
+Take Current State
+
+
+
 		

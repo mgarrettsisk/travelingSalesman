@@ -1,71 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.StackPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <items>
-          <Button mnemonicParsing="false" text="Random Start" />
-            <Button mnemonicParsing="false" text="Solve Puzzle" />
-        </items>
-      </ToolBar>
-   </top>
-   <left>
-      <VBox minWidth="200.0" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Starting Temperature">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <TextField />
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="10.0" />
-               </VBox.margin>
-            </Separator>
-            <Label text="Temperature Decrement" />
-            <TextField>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </TextField>
-            <Separator layoutX="10.0" layoutY="64.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="10.0" />
-               </VBox.margin>
-            </Separator>
-            <Label layoutX="10.0" layoutY="72.0" text="Ending Temperature" />
-            <TextField layoutX="10.0" layoutY="89.0" />
-         </children>
-         <BorderPane.margin>
-            <Insets left="5.0" />
-         </BorderPane.margin>
-      </VBox>
-   </left>
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextArea prefHeight="200.0" prefWidth="129.0" />
-         </children>
-      </VBox>
-   </right>
    <center>
-      <Canvas height="200.0" width="200.0" BorderPane.alignment="CENTER" />
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="8-Puzzle Problem">
+               <content>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <TextField fx:id="goalState11" editable="false" layoutX="100.0" layoutY="204.0" prefHeight="27.0" prefWidth="40.0" text="1" />
+                              <TextField fx:id="goalState12" editable="false" layoutX="100.0" layoutY="231.0" prefHeight="27.0" prefWidth="40.0" text="8" />
+                              <TextField fx:id="goalState13" editable="false" layoutX="100.0" layoutY="258.0" prefHeight="27.0" prefWidth="40.0" text="7" />
+                              <TextField fx:id="goalState21" editable="false" layoutX="140.0" layoutY="204.0" prefHeight="27.0" prefWidth="40.0" text="2" />
+                              <TextField fx:id="goalState22" editable="false" layoutX="140.0" layoutY="231.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="goalState23" editable="false" layoutX="140.0" layoutY="258.0" prefHeight="27.0" prefWidth="40.0" text="6" />
+                              <TextField fx:id="goalState31" editable="false" layoutX="180.0" layoutY="204.0" prefHeight="27.0" prefWidth="40.0" text="3" />
+                              <TextField fx:id="goalState32" editable="false" layoutX="180.0" layoutY="231.0" prefHeight="27.0" prefWidth="40.0" text="4" />
+                              <TextField fx:id="goalState33" editable="false" layoutX="180.0" layoutY="258.0" prefHeight="27.0" prefWidth="40.0" text="5" />
+                              <TextField fx:id="startState11" layoutX="100.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState12" layoutX="100.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState13" layoutX="100.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState21" layoutX="140.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState22" layoutX="140.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState23" layoutX="140.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState31" layoutX="180.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState32" layoutX="180.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState33" layoutX="180.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
+                              <Label fx:id="startStateLabel" layoutX="123.0" layoutY="21.0" text="Starting State" />
+                              <Label fx:id="goalStateLabel" layoutX="132.0" layoutY="178.0" text="Goal State" />
+                              <Button fx:id="randomStartButton" layoutX="312.0" layoutY="25.0" mnemonicParsing="false" text="Random Starting State" />
+                              <Button fx:id="solvePuzzleButton" layoutX="312.0" layoutY="165.0" mnemonicParsing="false" text="Solve Puzzle" />
+                              <Label fx:id="solutionListLabel" layoutX="321.0" layoutY="204.0" text="Puzzle Solution Steps" />
+                              <ListView fx:id="solutionListView" layoutX="312.0" layoutY="220.0" prefHeight="98.0" prefWidth="275.0" />
+                              <TextField fx:id="startingTemp" layoutX="477.0" layoutY="64.0" prefHeight="27.0" prefWidth="64.0" />
+                              <TextField fx:id="tempDecrement" layoutX="477.0" layoutY="98.0" prefHeight="27.0" prefWidth="64.0" />
+                              <TextField fx:id="quenchingTemp" layoutX="477.0" layoutY="131.0" prefHeight="27.0" prefWidth="64.0" />
+                              <Label fx:id="startingTempLabel" layoutX="350.0" layoutY="69.0" text="Starting Temperature" />
+                              <Label fx:id="decrementLabel" layoutX="332.0" layoutY="103.0" text="Temperature Decrement" />
+                              <Label fx:id="quenchingLabel" layoutX="332.0" layoutY="136.0" text="Quenching Temperature" />
+                           </children>
+                        </AnchorPane>
+                     </children></StackPane>
+               </content>
+            </Tab>
+          <Tab text="Shortest Toolpath Problem">
+               <content>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Canvas fx:id="toolpathCanvas" height="300.0" layoutX="280.0" layoutY="19.0" width="300.0" />
+                              <Button fx:id="randomArrangementButton" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" text="Generate Random Object Arrangement" />
+                              <Button fx:id="solveToolpathButton" layoutX="42.0" layoutY="175.0" mnemonicParsing="false" text="Determine Shortest Toolpath" />
+                              <Separator layoutX="255.0" layoutY="7.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="15.0" />
+                              <TextField fx:id="toolpathStartTemp" layoutX="194.0" layoutY="61.0" prefHeight="27.0" prefWidth="50.0" />
+                              <TextField fx:id="toolpathTempDecrement" layoutX="194.0" layoutY="93.0" prefHeight="27.0" prefWidth="50.0" />
+                              <TextField fx:id="toolpathQuenchingTemp" layoutX="194.0" layoutY="126.0" prefHeight="27.0" prefWidth="50.0" />
+                              <ListView fx:id="toolpathListView" layoutX="14.0" layoutY="212.0" prefHeight="117.0" prefWidth="235.0" />
+                              <Label layoutX="60.0" layoutY="66.0" text="Starting Temperature" />
+                              <Label layoutX="42.0" layoutY="98.0" text="Temperature Decrement" />
+                              <Label layoutX="42.0" layoutY="131.0" text="Quenching Temperature" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </content></Tab>
+        </tabs>
+      </TabPane>
    </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu fx:id="actionsMenu" mnemonicParsing="false" text="Actions">
+            <items>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="puzzleMenuLabel" disable="true" mnemonicParsing="false" text="8-Puzzle Problem" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem fx:id="randomStartMenuItem" mnemonicParsing="false" text="Random Starting State" />
+                  <MenuItem fx:id="solvePuzzleMenuItem" mnemonicParsing="false" text="Solve Puzzle" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="toolpathMenuLabel" disable="true" mnemonicParsing="false" text="Shortest Toolpath Problem" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="randomArrangementMenuItem" mnemonicParsing="false" text="Generate Random Arrangement" />
+                  <MenuItem fx:id="shortestToolpathMenuItem" mnemonicParsing="false" text="Determine Shortest Toolpath" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment02.mainController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -46,7 +46,7 @@
                               <TextField fx:id="startState33" layoutX="180.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
                               <Label fx:id="startStateLabel" layoutX="123.0" layoutY="21.0" text="Starting State" />
                               <Label fx:id="goalStateLabel" layoutX="132.0" layoutY="178.0" text="Goal State" />
-                              <Button fx:id="randomStartButton" layoutX="312.0" layoutY="25.0" mnemonicParsing="false" text="Random Starting State" />
+                              <Button fx:id="randomStartButton" layoutX="312.0" layoutY="25.0" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
                               <Button fx:id="solvePuzzleButton" layoutX="312.0" layoutY="165.0" mnemonicParsing="false" text="Solve Puzzle" />
                               <Label fx:id="solutionListLabel" layoutX="321.0" layoutY="204.0" text="Puzzle Solution Steps" />
                               <ListView fx:id="solutionListView" layoutX="312.0" layoutY="220.0" prefHeight="98.0" prefWidth="275.0" />
@@ -89,9 +89,9 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeApp" text="Close" />
             </items>
           </Menu>
           <Menu fx:id="actionsMenu" mnemonicParsing="false" text="Actions">
@@ -99,7 +99,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="puzzleMenuLabel" disable="true" mnemonicParsing="false" text="8-Puzzle Problem" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="randomStartMenuItem" mnemonicParsing="false" text="Random Starting State" />
+              <MenuItem fx:id="randomStartMenuItem" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
                   <MenuItem fx:id="solvePuzzleMenuItem" mnemonicParsing="false" text="Solve Puzzle" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="toolpathMenuLabel" disable="true" mnemonicParsing="false" text="Shortest Toolpath Problem" />
@@ -108,9 +108,9 @@
                   <MenuItem fx:id="shortestToolpathMenuItem" mnemonicParsing="false" text="Determine Shortest Toolpath" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>

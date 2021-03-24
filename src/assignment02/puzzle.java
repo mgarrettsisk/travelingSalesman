@@ -1,5 +1,8 @@
 package assignment02;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class puzzle {
     // this class defines the puzzle object and all associated attributes and methods
 
@@ -44,6 +47,32 @@ public class puzzle {
     // public methods
     public void setRandomState() {
         // this method generates a random state of integers, ensuring none are repeated and all lie within limits
+        // create an array of all tile values
+        ArrayList<Integer> tileList = new ArrayList<>();
+        Random rand = new Random();
+        for (int index = 0; index <= 8; index++) {
+            tileList.add(index);
+        }
+        // set the cells of the initial state in a random fashion, removing values that have already been
+        int xCoordinate = 0;
+        int yCoordinate = 0;
+        while (!(tileList.isEmpty())) {
+            if (tileList.size() == 1) {
+                setCellValue(tileList.get(0), 2, 2);
+                tileList.remove(0);
+            } else {
+                int workingIndex = rand.nextInt(tileList.size() - 1);
+                int result = tileList.get(workingIndex);
+                setCellValue(result, xCoordinate, yCoordinate);
+                tileList.remove(workingIndex);
+                xCoordinate++;
+                if (xCoordinate % 3 == 0) {
+                    yCoordinate++;
+                    xCoordinate = 0;
+                }
+            }
+        }
+
     }
 
     public int[][] getPuzzleState() {

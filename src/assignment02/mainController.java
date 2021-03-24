@@ -3,6 +3,7 @@ package assignment02;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class mainController {
@@ -10,6 +11,7 @@ public class mainController {
 
     // THIS SECTION IS FOR GENERAL APPLICATION EVENTS
 
+    public BorderPane baseBorderPane;
     public MenuItem closeMenuItem;
     public MenuItem aboutMenuItem;
 
@@ -22,6 +24,8 @@ public class mainController {
 
     public void closeApp() {
         // closes the application
+        Stage appWindow = (Stage)baseBorderPane.getScene().getWindow();
+        appWindow.close();
     }
 
     // THIS SECTION IS RESERVED SOLELY FOR THE FIRST QUESTION OF ASSIGNMENT 2.

@@ -22,14 +22,14 @@ public class puzzle {
     };
 
     // define solutionState as a collection of 2D coordinates for use in heuristic calculations
-    private int[] one = {1,1};
-    private int[] two = {2,1};
-    private int[] three = {3,1};
-    private int[] four = {3,2};
-    private int[] five = {3,3};
-    private int[] six = {2,3};
-    private int[] seven = {1,3};
-    private int[] eight = {1,2};
+    private int[] one = {0,0};
+    private int[] two = {1,0};
+    private int[] three = {2,0};
+    private int[] four = {2,1};
+    private int[] five = {2,2};
+    private int[] six = {1,2};
+    private int[] seven = {0,2};
+    private int[] eight = {0,1};
 
 
     // constructors
@@ -129,11 +129,11 @@ public class puzzle {
         // takes an integer as input and returns the location of the element in the puzzle. Will return (-1,-1) if not
         // found within the puzzle
         int[] outputCoordinates = {-1,-1};
-        for (int yIndex = 0; yIndex <= 3; yIndex++) {
-            for (int xIndex = 0; xIndex <=3; xIndex++) {
+        for (int yIndex = 0; yIndex < 3; yIndex++) {
+            for (int xIndex = 0; xIndex < 3; xIndex++) {
                 if (puzzleState[xIndex][yIndex] == inputValue) {
-                    outputCoordinates[0] = xIndex+1;
-                    outputCoordinates[1] = yIndex+1;
+                    outputCoordinates[0] = xIndex;
+                    outputCoordinates[1] = yIndex;
                     return outputCoordinates;
                 }
             }

@@ -28,18 +28,38 @@ Current state -> examine each possible move (this is the iteration number)
 
 Then decrement the temperature (the initial, final, and decrement values provided)
 
- 
-Take Current State
+Steps:
+
+DETERMINE POSSIBLE MOVES
+FOR EACH POSSIBLE MOVE:
+    COMPUTE THE HEURISTIC VALUE OF POST-MOVE STATE
+    COMPARE THE VALUE TO THE PRE-MOVE STATE
+    IF (VALUE < PRE-MOVE STATE) THEN
+        ACCEPT MOVE, AND MAKE STATE THE CURRENT STATE
+    ELSE IF (VALUE > PRE-MOVE STATE) THEN
+        COMPUTE e^(-_Delta/T)
+        COMPUTE RANDOM VALUE BETWEEN 0 AND 1
+        IF (RANDOM VALUE IS LESS THAN e^(...)) THEN
+            ACCEPT MOVE, AND MAKE STATE THE CURRENT STATE
+        ELSE
+            REJECT MOVE
+        END IF
+    ELSE IF (VALUE == PRE-MOVE STATE) THEN
+        COMPUTE RANDOM VALUE BETWEEN 0 AND 100
+        IF (RANDOM VALUE > 50) THEN
+            ACCEPT MOVE, AND MAKE STATE THE CURRENT STATE
+        ELSE
+            REJECT MOVE
+        END IF
+    END IF
+END FOR
 
 
-CLASS puzzle
-	ATTRIBUTES
+For traveling salesman:
 
-	public int[] topLeft = [1,1];
-	public int[] top = [2,1];
-	public int[] 
+Randomly connect all points in grid. Total distance of all edges is computed.
 
-CLASS puzzleState
+Randomly move
 
 	
 

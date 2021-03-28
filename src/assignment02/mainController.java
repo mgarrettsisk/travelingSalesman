@@ -1,11 +1,18 @@
 package assignment02;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class mainController {
     // the controller class used to control the user experience and interface
@@ -19,8 +26,10 @@ public class mainController {
 
     // application methods
 
-    public void showAbout() {
+    public void showAbout() throws Exception {
         // shows the about dialog box with appropriate Assignment 02 information on it
+        aboutDialogController about = new aboutDialogController();
+        about.showWindow();
     }
 
     public void closeApp() {
@@ -49,47 +58,45 @@ public class mainController {
     public TextField downHeuristic;
     public TextField leftHeuristic;
     public TextField rightHeuristic;
-    public TextField startingTemp;
-
+    public ListView<String> solutionListView;
     public puzzle workingPuzzle = new puzzle();
 
-
     // EVENT HANDLER METHODS
-
     public void setRandomState() {
         // this method creates a puzzle object, and creates a random state, and displays the values in the appropriate
         // text fields
         workingPuzzle.setRandomState();
         drawGrid();
-        startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
+        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
-
     public void moveZeroUp() {
         workingPuzzle.moveUp();
         drawGrid();
-        startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
+        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
-
     public void moveZeroDown() {
         workingPuzzle.moveDown();
         drawGrid();
-        startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
+        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
-
     public void moveZeroLeft() {
         workingPuzzle.moveLeft();
         drawGrid();
-        startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
+        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
-
     public void moveZeroRight() {
         workingPuzzle.moveRight();
         drawGrid();
-        startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
+        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
-
+    public void solveButton() {
+        System.out.println("The button has been pressed.");
+        ObservableList<String> visibleList;
+        visibleList = FXCollections.observableArrayList();
+        visibleList.setAll(workingPuzzle.solvePuzzle(2000, 0.9));
+        solutionListView.setItems(visibleList);
+    }
     // private methods
-
     private void drawGrid() {
         // this method redraws the current state grid to reflect the change in the puzzle state
         startState11.setText((Integer.toString(workingPuzzle.getCellValue(0,0))));
@@ -101,7 +108,6 @@ public class mainController {
         startState13.setText((Integer.toString(workingPuzzle.getCellValue(0,2))));
         startState23.setText((Integer.toString(workingPuzzle.getCellValue(1,2))));
         startState33.setText((Integer.toString(workingPuzzle.getCellValue(2,2))));
-
         // recomputes the heuristics for each move as well
         int[] nextValues = workingPuzzle.nextHeuristics();
         upHeuristic.setText(Integer.toString(nextValues[0]));
@@ -109,6 +115,4 @@ public class mainController {
         leftHeuristic.setText(Integer.toString(nextValues[2]));
         rightHeuristic.setText(Integer.toString(nextValues[3]));
     }
-
-
 }

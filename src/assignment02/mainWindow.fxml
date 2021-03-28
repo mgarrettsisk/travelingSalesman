@@ -47,15 +47,9 @@
                               <Label fx:id="startStateLabel" layoutX="123.0" layoutY="21.0" text="Starting State" />
                               <Label fx:id="goalStateLabel" layoutX="132.0" layoutY="216.0" text="Goal State" />
                               <Button fx:id="randomStartButton" layoutX="312.0" layoutY="25.0" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
-                              <Button fx:id="solvePuzzleButton" layoutX="312.0" layoutY="165.0" mnemonicParsing="false" text="Solve Puzzle" />
-                              <Label fx:id="solutionListLabel" layoutX="321.0" layoutY="204.0" text="Puzzle Solution Steps" />
-                              <ListView fx:id="solutionListView" layoutX="312.0" layoutY="220.0" prefHeight="98.0" prefWidth="275.0" />
-                              <TextField fx:id="startingTemp" layoutX="477.0" layoutY="64.0" prefHeight="27.0" prefWidth="64.0" />
-                              <TextField fx:id="tempDecrement" layoutX="477.0" layoutY="98.0" prefHeight="27.0" prefWidth="64.0" />
-                              <TextField fx:id="quenchingTemp" layoutX="477.0" layoutY="131.0" prefHeight="27.0" prefWidth="64.0" />
-                              <Label fx:id="startingTempLabel" layoutX="350.0" layoutY="69.0" text="Starting Temperature" />
-                              <Label fx:id="decrementLabel" layoutX="332.0" layoutY="103.0" text="Temperature Decrement" />
-                              <Label fx:id="quenchingLabel" layoutX="332.0" layoutY="136.0" text="Quenching Temperature" />
+                              <Button fx:id="solvePuzzleButton" layoutX="466.0" layoutY="25.0" mnemonicParsing="false" onAction="#solveButton" text="Solve Puzzle" />
+                              <Label fx:id="solutionListLabel" layoutX="312.0" layoutY="64.0" text="Puzzle Solution Steps" />
+                              <ListView fx:id="solutionListView" layoutX="312.0" layoutY="82.0" prefHeight="236.0" prefWidth="275.0" />
                               <Button fx:id="upButton" layoutX="66.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroUp" prefHeight="27.0" prefWidth="40.0" text="^" />
                               <Button fx:id="downButton" layoutX="116.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroDown" prefHeight="27.0" prefWidth="40.0" text="v" />
                               <Button fx:id="leftButton" layoutX="165.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroLeft" prefHeight="27.0" prefWidth="40.0" text="&lt;" />
@@ -108,7 +102,7 @@
                   <MenuItem fx:id="puzzleMenuLabel" disable="true" mnemonicParsing="false" text="8-Puzzle Problem" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem fx:id="randomStartMenuItem" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
-                  <MenuItem fx:id="solvePuzzleMenuItem" mnemonicParsing="false" text="Solve Puzzle" />
+                  <MenuItem fx:id="solvePuzzleMenuItem" mnemonicParsing="false" onAction="#solveButton" text="Solve Puzzle" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="toolpathMenuLabel" disable="true" mnemonicParsing="false" text="Shortest Toolpath Problem" />
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -118,7 +112,7 @@
           </Menu>
           <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#showAbout" text="About" />
             </items>
           </Menu>
         </menus>

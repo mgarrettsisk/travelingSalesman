@@ -98,54 +98,129 @@ public class puzzle {
         this.puzzleState[y][x] = inputValue;
     }
 
-    public LinkedList<String> solvePuzzle(int startingTemp, int decrement, int quenchingTemp) {
+    public LinkedList<String> solvePuzzle(double startingTemp, double decrement) {
         // this method uses simulated annealing to solve the puzzle from a given state. It returns an array list of
         // steps used to solve the problem
-
+        System.out.println("Has entered the function solvePuzzle");
         LinkedList<String> solutionStack = new LinkedList<>();
+        double currentTemp = startingTemp;
+        int maxIterations = 10000;
+        int iterations = 0;
 
-        int currentValue, delta, minimumIndex;
-        int[] nextValue;
-
-        int currentTemp = startingTemp;
-
-        while (!(Arrays.deepEquals(puzzleState, solutionState))) {
-
-            currentValue = currentHeuristic();
-            nextValue = nextHeuristics();
-            minimumIndex = nextValue[4];
-            delta = currentValue - nextValue[minimumIndex];
-            if (delta < 0) {
-                if (minimumIndex == 0) {
-                    moveUp();
-                } else if (minimumIndex == 1) {
-                    moveDown();
-                } else if (minimumIndex == 2) {
-                    moveLeft();
-                } else if (minimumIndex == 3) {
-                    moveRight();
-                }
-            } else if ( delta >= 0) {
-                Random randomDouble = new Random();
-                double randValue = randomDouble.nextInt(100)/100.0;
-                double tempValue = Math.exp(-delta/(double)currentTemp);
-                if (randValue < tempValue) {
-                    // choose a random move to make
-                    Random rand = new Random();
-                    int randomMove = rand.nextInt(4);
-                    
-                }
+        System.out.println("About to enter the while loop");
+        while (!(Arrays.deepEquals(this.puzzleState,this.solutionState))&& iterations < maxIterations) {
+            System.out.println("The current iteration is: " + iterations);
+            String[] moves = getPossibleMoves();
+            Random rNumber = new Random();
+            int randomChoice = rNumber.nextInt(4) + 1;
+            switch (randomChoice) {
+                case 1:
+                    if (moves[0].equalsIgnoreCase("up")) {
+                        int currentValue = currentHeuristic();
+                        moveUp();
+                        int nextValue = currentHeuristic();
+                        int delta = nextValue - currentValue;
+                        if (delta < 0) {
+                            // keep the move
+                            solutionStack.push("Move Zero Up");
+                        } else if (delta >= 0){
+                            Random rand = new Random();
+                            double randValue = rand.nextInt(100)/100.0;
+                            double tempValue = Math.exp(-delta/startingTemp);
+                            if (randValue < tempValue) {
+                                // keep the move
+                                solutionStack.push("Move Zero Up");
+                            } else {
+                                // reject the move
+                                moveDown();
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    if (moves[1].equalsIgnoreCase("down")) {
+                        int currentValue = currentHeuristic();
+                        moveDown();
+                        int nextValue = currentHeuristic();
+                        int delta = nextValue - currentValue;
+                        if (delta < 0) {
+                            // keep the move
+                            solutionStack.push("Move Zero Down");
+                        } else if (delta >= 0){
+                            Random rand = new Random();
+                            double randValue = rand.nextInt(100)/100.0;
+                            double tempValue = Math.exp(-delta/startingTemp);
+                            if (randValue < tempValue) {
+                                // keep the move
+                                solutionStack.push("Move Zero Down");
+                            } else {
+                                // reject the move
+                                moveUp();
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    if (moves[2].equalsIgnoreCase("left")) {
+                        int currentValue = currentHeuristic();
+                        moveLeft();
+                        int nextValue = currentHeuristic();
+                        int delta = nextValue - currentValue;
+                        if (delta < 0) {
+                            // keep the move
+                            solutionStack.push("Move Zero Left");
+                        } else if (delta >= 0){
+                            Random rand = new Random();
+                            double randValue = rand.nextInt(100)/100.0;
+                            double tempValue = Math.exp(-delta/startingTemp);
+                            if (randValue < tempValue) {
+                                // keep the move
+                                solutionStack.push("Move Zero Left");
+                            } else {
+                                // reject the move
+                                moveRight();
+                            }
+                        }
+                    }
+                    break;
+                case 4:
+                    if (moves[3].equalsIgnoreCase("right")) {
+                        int currentValue = currentHeuristic();
+                        moveRight();
+                        int nextValue = currentHeuristic();
+                        int delta = nextValue - currentValue;
+                        if (delta < 0) {
+                            // keep the move
+                            solutionStack.push("Move Zero Right");
+                        } else if (delta >= 0){
+                            Random rand = new Random();
+                            double randValue = rand.nextInt(100)/100.0;
+                            double tempValue = Math.exp(-delta/startingTemp);
+                            if (randValue < tempValue) {
+                                // keep the move
+                                solutionStack.push("Move Zero Right");
+                            } else {
+                                // reject the move
+                                moveLeft();
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    // do nothing
             }
-
-
+            iterations++;
+            if (iterations % 100 == 0) {
+                currentTemp = currentTemp * decrement;
+            }
         }
-
         return solutionStack;
     }
 
     public String[] getPossibleMoves() {
         // this method creates a string array of possible moves = {'up','down','left','right'}
         String[] possibleMoves = {"","","",""};
+
 
         // find the blank square location (denoted by a zero)
         int[] blankLocation = findCellLocation(0);

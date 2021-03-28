@@ -26,15 +26,15 @@
                      <children>
                         <AnchorPane>
                            <children>
-                              <TextField fx:id="goalState11" editable="false" layoutX="100.0" layoutY="204.0" prefHeight="27.0" prefWidth="40.0" text="1" />
-                              <TextField fx:id="goalState12" editable="false" layoutX="100.0" layoutY="231.0" prefHeight="27.0" prefWidth="40.0" text="8" />
-                              <TextField fx:id="goalState13" editable="false" layoutX="100.0" layoutY="258.0" prefHeight="27.0" prefWidth="40.0" text="7" />
-                              <TextField fx:id="goalState21" editable="false" layoutX="140.0" layoutY="204.0" prefHeight="27.0" prefWidth="40.0" text="2" />
-                              <TextField fx:id="goalState22" editable="false" layoutX="140.0" layoutY="231.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="goalState23" editable="false" layoutX="140.0" layoutY="258.0" prefHeight="27.0" prefWidth="40.0" text="6" />
-                              <TextField fx:id="goalState31" editable="false" layoutX="180.0" layoutY="204.0" prefHeight="27.0" prefWidth="40.0" text="3" />
-                              <TextField fx:id="goalState32" editable="false" layoutX="180.0" layoutY="231.0" prefHeight="27.0" prefWidth="40.0" text="4" />
-                              <TextField fx:id="goalState33" editable="false" layoutX="180.0" layoutY="258.0" prefHeight="27.0" prefWidth="40.0" text="5" />
+                              <TextField fx:id="goalState11" editable="false" layoutX="100.0" layoutY="242.0" prefHeight="27.0" prefWidth="40.0" text="1" />
+                              <TextField fx:id="goalState12" editable="false" layoutX="100.0" layoutY="269.0" prefHeight="27.0" prefWidth="40.0" text="8" />
+                              <TextField fx:id="goalState13" editable="false" layoutX="100.0" layoutY="296.0" prefHeight="27.0" prefWidth="40.0" text="7" />
+                              <TextField fx:id="goalState21" editable="false" layoutX="140.0" layoutY="242.0" prefHeight="27.0" prefWidth="40.0" text="2" />
+                              <TextField fx:id="goalState22" editable="false" layoutX="140.0" layoutY="269.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="goalState23" editable="false" layoutX="140.0" layoutY="296.0" prefHeight="27.0" prefWidth="40.0" text="6" />
+                              <TextField fx:id="goalState31" editable="false" layoutX="180.0" layoutY="242.0" prefHeight="27.0" prefWidth="40.0" text="3" />
+                              <TextField fx:id="goalState32" editable="false" layoutX="180.0" layoutY="269.0" prefHeight="27.0" prefWidth="40.0" text="4" />
+                              <TextField fx:id="goalState33" editable="false" layoutX="180.0" layoutY="296.0" prefHeight="27.0" prefWidth="40.0" text="5" />
                               <TextField fx:id="startState11" layoutX="100.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
                               <TextField fx:id="startState12" layoutX="100.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
                               <TextField fx:id="startState13" layoutX="100.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
@@ -45,7 +45,7 @@
                               <TextField fx:id="startState32" layoutX="180.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
                               <TextField fx:id="startState33" layoutX="180.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
                               <Label fx:id="startStateLabel" layoutX="123.0" layoutY="21.0" text="Starting State" />
-                              <Label fx:id="goalStateLabel" layoutX="132.0" layoutY="178.0" text="Goal State" />
+                              <Label fx:id="goalStateLabel" layoutX="132.0" layoutY="216.0" text="Goal State" />
                               <Button fx:id="randomStartButton" layoutX="312.0" layoutY="25.0" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
                               <Button fx:id="solvePuzzleButton" layoutX="312.0" layoutY="165.0" mnemonicParsing="false" text="Solve Puzzle" />
                               <Label fx:id="solutionListLabel" layoutX="321.0" layoutY="204.0" text="Puzzle Solution Steps" />
@@ -56,6 +56,14 @@
                               <Label fx:id="startingTempLabel" layoutX="350.0" layoutY="69.0" text="Starting Temperature" />
                               <Label fx:id="decrementLabel" layoutX="332.0" layoutY="103.0" text="Temperature Decrement" />
                               <Label fx:id="quenchingLabel" layoutX="332.0" layoutY="136.0" text="Quenching Temperature" />
+                              <Button fx:id="upButton" layoutX="66.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroUp" prefHeight="27.0" prefWidth="40.0" text="^" />
+                              <Button fx:id="downButton" layoutX="116.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroDown" prefHeight="27.0" prefWidth="40.0" text="v" />
+                              <Button fx:id="leftButton" layoutX="165.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroLeft" prefHeight="27.0" prefWidth="40.0" text="&lt;" />
+                              <Button fx:id="rightButton" layoutX="215.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroRight" prefHeight="27.0" prefWidth="40.0" text="&gt;" />
+                              <TextField fx:id="upHeuristic" layoutX="66.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="downHeuristic" layoutX="116.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="leftHeuristic" layoutX="165.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="rightHeuristic" layoutX="215.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
                            </children>
                         </AnchorPane>
                      </children></StackPane>

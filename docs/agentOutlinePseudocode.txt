@@ -55,6 +55,18 @@ Randomly connect all points in grid. Total distance of all edges is computed.
 
 Randomly move
 
+
+Randomly generate a list of targets
+
+while the list is less than optimal (?)
+    compute the current path length
+    swap two random points and compute new path length
+    if the path length is shorter
+        keep the move
+        add number to number of successful paths
+    else
+
+if max iterations is reached and the number of successful paths is still zero, the solution has been found
 	
 
 

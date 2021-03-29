@@ -2,7 +2,7 @@ package assignment02;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -10,37 +10,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 public class mainController {
-    // the controller class used to control the user experience and interface
-
-    // THIS SECTION IS FOR GENERAL APPLICATION EVENTS
-
+    //------------------------------------------------------------------------------------------------------------------
+    //                                         APPLICATION ATTRIBUTES
+    //------------------------------------------------------------------------------------------------------------------
     public BorderPane baseBorderPane;
     public MenuItem closeMenuItem;
     public MenuItem aboutMenuItem;
-
-
-    // application methods
-
+    //------------------------------------------------------------------------------------------------------------------
+    //                                           APPLICATION METHODS
+    //------------------------------------------------------------------------------------------------------------------
     public void showAbout() throws Exception {
         // shows the about dialog box with appropriate Assignment 02 information on it
         aboutDialogController about = new aboutDialogController();
         about.showWindow();
     }
-
     public void closeApp() {
         // closes the application
         Stage appWindow = (Stage)baseBorderPane.getScene().getWindow();
         appWindow.close();
     }
-
-    // THIS SECTION IS RESERVED SOLELY FOR THE FIRST QUESTION OF ASSIGNMENT 2.
-    // FOR THE SECOND TAB, PLEASE CRTL+F "SECTION 2: TOOLPATH"
-
+    //------------------------------------------------------------------------------------------------------------------
+    // TAB 1: ASSIGNMENT 02, QUESTION 1 - 8-Puzzle
+    //------------------------------------------------------------------------------------------------------------------
+    //                                               ATTRIBUTES
+    //------------------------------------------------------------------------------------------------------------------
     public TextField startState11;
     public TextField startState21;
     public TextField startState31;
@@ -60,8 +54,9 @@ public class mainController {
     public TextField rightHeuristic;
     public ListView<String> solutionListView;
     public puzzle workingPuzzle = new puzzle();
-
-    // EVENT HANDLER METHODS
+    //------------------------------------------------------------------------------------------------------------------
+    //                                          EVENT HANDLER METHODS
+    //------------------------------------------------------------------------------------------------------------------
     public void setRandomState() {
         // this method creates a puzzle object, and creates a random state, and displays the values in the appropriate
         // text fields
@@ -90,13 +85,15 @@ public class mainController {
         //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
     public void solveButton() {
-        System.out.println("The button has been pressed.");
         ObservableList<String> visibleList;
         visibleList = FXCollections.observableArrayList();
         visibleList.setAll(workingPuzzle.solvePuzzle(2000, 0.9));
         solutionListView.setItems(visibleList);
     }
-    // private methods
+
+    //------------------------------------------------------------------------------------------------------------------
+    //                                              PRIVATE METHODS
+    //------------------------------------------------------------------------------------------------------------------
     private void drawGrid() {
         // this method redraws the current state grid to reflect the change in the puzzle state
         startState11.setText((Integer.toString(workingPuzzle.getCellValue(0,0))));
@@ -115,4 +112,13 @@ public class mainController {
         leftHeuristic.setText(Integer.toString(nextValues[2]));
         rightHeuristic.setText(Integer.toString(nextValues[3]));
     }
+    private void drawTarget(GraphicsContext contextInput, toolpathOptimizer.target inputTarget) {
+        // this method takes a target object as input and draws a circle on the input canvas graphics context.
+    }
+    private void drawPath(GraphicsContext contextInput, toolpathOptimizer.target source, toolpathOptimizer.target destination) {
+        // method takes two targets as input and draws a line between them to represent the path
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    //                                     END OF CLASS mainController.java
+    //------------------------------------------------------------------------------------------------------------------
 }

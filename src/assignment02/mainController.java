@@ -2,6 +2,7 @@ package assignment02;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -31,8 +32,6 @@ public class mainController {
         appWindow.close();
     }
     //------------------------------------------------------------------------------------------------------------------
-    // TAB 1: ASSIGNMENT 02, QUESTION 1 - 8-Puzzle
-    //------------------------------------------------------------------------------------------------------------------
     //                                               ATTRIBUTES
     //------------------------------------------------------------------------------------------------------------------
     public TextField startState11;
@@ -54,6 +53,12 @@ public class mainController {
     public TextField rightHeuristic;
     public ListView<String> solutionListView;
     public puzzle workingPuzzle = new puzzle();
+
+    public Button randomArrangementButton;
+    public Button solveToolpathButton;
+    public Canvas toolpathCanvas;
+    public TextField targetQuantity;
+    public toolpathOptimizer toolpath = new toolpathOptimizer();
     //------------------------------------------------------------------------------------------------------------------
     //                                          EVENT HANDLER METHODS
     //------------------------------------------------------------------------------------------------------------------
@@ -62,33 +67,39 @@ public class mainController {
         // text fields
         workingPuzzle.setRandomState();
         drawGrid();
-        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
     public void moveZeroUp() {
         workingPuzzle.moveUp();
         drawGrid();
-        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
     public void moveZeroDown() {
         workingPuzzle.moveDown();
         drawGrid();
-        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
     public void moveZeroLeft() {
         workingPuzzle.moveLeft();
         drawGrid();
-        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
     public void moveZeroRight() {
         workingPuzzle.moveRight();
         drawGrid();
-        //startingTemp.setText(Integer.toString(workingPuzzle.currentHeuristic()));
     }
     public void solveButton() {
         ObservableList<String> visibleList;
         visibleList = FXCollections.observableArrayList();
         visibleList.setAll(workingPuzzle.solvePuzzle(2000, 0.9));
         solutionListView.setItems(visibleList);
+    }
+    public void generateTargets() {
+        // handler method that generates a set number of targets
+        int quantity = Integer.parseInt(targetQuantity.getText());
+        double maxWidth = toolpathCanvas.getWidth();
+        double maxHeight = toolpathCanvas.getWidth();
+        toolpath.generateRandomTargets(quantity, (int)maxWidth, (int)maxHeight);
+    }
+    public void solveToolpath() {
+        // handler method that optimizes the toolpath
+        toolpath.optimize();
     }
 
     //------------------------------------------------------------------------------------------------------------------

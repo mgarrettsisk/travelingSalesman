@@ -62,8 +62,7 @@ public class toolpathOptimizer {
         int iteration = 0;
         int successfulMoves = 0;
         double decrement = 0.9;
-        double initialTemp = 2000.0;
-        double currentTemp = initialTemp;
+        double currentTemp = 2000.0;
 
         boolean continueSearch = true;
 
@@ -93,12 +92,12 @@ public class toolpathOptimizer {
                     swapTwoRandomTargets(pairSwap[0], pairSwap[1]);
                 }
             }
-            // change the temperature on a set pattern (every 10 successful moves, reset iteration count
-            if (successfulMoves%10 == 0) {
+            // change the temperature on a set pattern (every 10 successful moves) and reset iteration count
+            if ((successfulMoves%10 == 0) || (iteration == maxIterations)) {
                 currentTemp = currentTemp * decrement;
                 iteration = 0;
             }
-            // a check to see if there are any additional "successful moves" made
+            // a check to see if there are any additional "successful moves" made for an iteration scheme
             if (iteration == maxIterations && successfulMoves == 0) {
                 continueSearch = false;
             }
@@ -143,7 +142,7 @@ public class toolpathOptimizer {
         targetList.add(indexTwo,workingTarget);
     }
     //------------------------------------------------------------------------------------------------------------------
-    //                                              NESTED CLASS(ES)
+    //                                              INNER CLASS(ES)
     //------------------------------------------------------------------------------------------------------------------
     public class target {
         // attributes

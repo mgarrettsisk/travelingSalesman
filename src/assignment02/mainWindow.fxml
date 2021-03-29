@@ -70,16 +70,11 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Canvas fx:id="toolpathCanvas" height="300.0" layoutX="280.0" layoutY="19.0" width="300.0" />
-                              <Button fx:id="randomArrangementButton" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" text="Generate Random Object Arrangement" />
-                              <Button fx:id="solveToolpathButton" layoutX="42.0" layoutY="175.0" mnemonicParsing="false" text="Determine Shortest Toolpath" />
+                              <Button fx:id="randomArrangementButton" layoutX="15.0" layoutY="100.0" mnemonicParsing="false" onAction="#generateTargets" text="Generate Random Object Arrangement" />
+                              <Button fx:id="solveToolpathButton" layoutX="43.0" layoutY="143.0" mnemonicParsing="false" onAction="#solveToolpath" text="Determine Shortest Toolpath" />
                               <Separator layoutX="255.0" layoutY="7.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="15.0" />
-                              <TextField fx:id="toolpathStartTemp" layoutX="194.0" layoutY="61.0" prefHeight="27.0" prefWidth="50.0" />
-                              <TextField fx:id="toolpathTempDecrement" layoutX="194.0" layoutY="93.0" prefHeight="27.0" prefWidth="50.0" />
-                              <TextField fx:id="toolpathQuenchingTemp" layoutX="194.0" layoutY="126.0" prefHeight="27.0" prefWidth="50.0" />
-                              <ListView fx:id="toolpathListView" layoutX="14.0" layoutY="212.0" prefHeight="117.0" prefWidth="235.0" />
-                              <Label layoutX="60.0" layoutY="66.0" text="Starting Temperature" />
-                              <Label layoutX="42.0" layoutY="98.0" text="Temperature Decrement" />
-                              <Label layoutX="42.0" layoutY="131.0" text="Quenching Temperature" />
+                              <TextField fx:id="targetQuantity" layoutX="153.0" layoutY="62.0" prefHeight="27.0" prefWidth="91.0" />
+                              <Label layoutX="26.0" layoutY="67.0" text="Number of Targets" />
                            </children>
                         </AnchorPane>
                      </children>

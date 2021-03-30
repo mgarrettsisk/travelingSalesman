@@ -1,0 +1,34 @@
+FUNCTION optimize(initialTemp, decrement, targetList) RETURNS VOID
+
+SET iterations <- 0
+SET successfulMoves <- 0
+SET maxIterations <- (number of targets)*(15)
+SET currentTemp <- initialTemp
+
+WHILE there are still successful moves possible within the iteration limit DO
+	INCREMENT iterations
+	COMPUTE the current path length of targetList
+	SWAP two random targets in targetList
+	COMPUTE the new path length of targetList
+	IF the new path length is shorter than the previous one THEN
+		KEEP the swap
+	ELSE 
+		COMPUTE temperature value using currentTemp
+		COMPUTE random value
+		IF random value greater than the temperature value THEN
+			KEEP the swap
+		ELSE
+			REJECT the swap (undo the swap from before)
+		END IF
+	END IF
+	//Check to see if need to lower the temperature
+	IF iterations is at max, or if there have been 10 successful moves THEN
+		SET currentTemp <- (currentTemp * decrement)
+		SET iterations <- 0
+		SET successfulMoves <- 0
+	ELSE IF the number of iterations is at max and there are zero successful moves THEN
+		EXIT the WHILE loop
+	ELSE
+		DO NOTHING
+	END IF
+END WHILE

@@ -15,71 +15,93 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="baseBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment02.mainController">
+<BorderPane fx:id="baseBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment02.mainController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="8-Puzzle Problem">
-               <content>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane>
-                           <children>
-                              <TextField fx:id="goalState11" editable="false" layoutX="100.0" layoutY="242.0" prefHeight="27.0" prefWidth="40.0" text="1" />
-                              <TextField fx:id="goalState12" editable="false" layoutX="100.0" layoutY="269.0" prefHeight="27.0" prefWidth="40.0" text="8" />
-                              <TextField fx:id="goalState13" editable="false" layoutX="100.0" layoutY="296.0" prefHeight="27.0" prefWidth="40.0" text="7" />
-                              <TextField fx:id="goalState21" editable="false" layoutX="140.0" layoutY="242.0" prefHeight="27.0" prefWidth="40.0" text="2" />
-                              <TextField fx:id="goalState22" editable="false" layoutX="140.0" layoutY="269.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="goalState23" editable="false" layoutX="140.0" layoutY="296.0" prefHeight="27.0" prefWidth="40.0" text="6" />
-                              <TextField fx:id="goalState31" editable="false" layoutX="180.0" layoutY="242.0" prefHeight="27.0" prefWidth="40.0" text="3" />
-                              <TextField fx:id="goalState32" editable="false" layoutX="180.0" layoutY="269.0" prefHeight="27.0" prefWidth="40.0" text="4" />
-                              <TextField fx:id="goalState33" editable="false" layoutX="180.0" layoutY="296.0" prefHeight="27.0" prefWidth="40.0" text="5" />
-                              <TextField fx:id="startState11" layoutX="100.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState12" layoutX="100.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState13" layoutX="100.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState21" layoutX="140.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState22" layoutX="140.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState23" layoutX="140.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState31" layoutX="180.0" layoutY="50.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState32" layoutX="180.0" layoutY="77.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="startState33" layoutX="180.0" layoutY="104.0" prefHeight="27.0" prefWidth="40.0" />
-                              <Label fx:id="startStateLabel" layoutX="123.0" layoutY="21.0" text="Starting State" />
-                              <Label fx:id="goalStateLabel" layoutX="132.0" layoutY="216.0" text="Goal State" />
-                              <Button fx:id="randomStartButton" layoutX="312.0" layoutY="25.0" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
-                              <Button fx:id="solvePuzzleButton" layoutX="466.0" layoutY="25.0" mnemonicParsing="false" onAction="#solveButton" text="Solve Puzzle" />
-                              <Label fx:id="solutionListLabel" layoutX="312.0" layoutY="64.0" text="Puzzle Solution Steps" />
-                              <ListView fx:id="solutionListView" layoutX="312.0" layoutY="82.0" prefHeight="236.0" prefWidth="275.0" />
-                              <Button fx:id="upButton" layoutX="66.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroUp" prefHeight="27.0" prefWidth="40.0" text="^" />
-                              <Button fx:id="downButton" layoutX="116.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroDown" prefHeight="27.0" prefWidth="40.0" text="v" />
-                              <Button fx:id="leftButton" layoutX="165.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroLeft" prefHeight="27.0" prefWidth="40.0" text="&lt;" />
-                              <Button fx:id="rightButton" layoutX="215.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveZeroRight" prefHeight="27.0" prefWidth="40.0" text="&gt;" />
-                              <TextField fx:id="upHeuristic" layoutX="66.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="downHeuristic" layoutX="116.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="leftHeuristic" layoutX="165.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
-                              <TextField fx:id="rightHeuristic" layoutX="215.0" layoutY="179.0" prefHeight="27.0" prefWidth="40.0" />
-                           </children>
-                        </AnchorPane>
-                     </children></StackPane>
-               </content>
-            </Tab>
-          <Tab text="Shortest Toolpath Problem">
+          <Tab closable="false" text="Shortest Toolpath Problem">
                <content>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Canvas fx:id="toolpathCanvas" height="300.0" layoutX="280.0" layoutY="19.0" width="300.0" />
-                              <Button fx:id="randomArrangementButton" layoutX="15.0" layoutY="100.0" mnemonicParsing="false" onAction="#generateTargets" text="Generate Random Object Arrangement" />
-                              <Button fx:id="solveToolpathButton" layoutX="43.0" layoutY="143.0" mnemonicParsing="false" onAction="#solveToolpath" text="Determine Shortest Toolpath" />
-                              <Separator layoutX="255.0" layoutY="7.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="15.0" />
-                              <TextField fx:id="targetQuantity" layoutX="153.0" layoutY="62.0" prefHeight="27.0" prefWidth="91.0" />
-                              <Label layoutX="26.0" layoutY="67.0" text="Number of Targets" />
+                              <Canvas fx:id="toolpathCanvas" height="500.0" layoutX="277.0" layoutY="19.0" width="500.0" />
+                              <Button fx:id="randomArrangementButton" layoutX="16.0" layoutY="63.0" mnemonicParsing="false" onAction="#generateTargets" prefHeight="27.0" prefWidth="235.0" text="Generate Random Object Arrangement" />
+                              <Button fx:id="solveToolpathButton" layoutX="16.0" layoutY="98.0" mnemonicParsing="false" onAction="#solveToolpath" prefHeight="27.0" prefWidth="235.0" text="Determine Shortest Toolpath" />
+                              <Separator layoutX="255.0" layoutY="7.0" orientation="VERTICAL" prefHeight="524.0" prefWidth="15.0" />
+                              <TextField fx:id="targetQuantity" layoutX="154.0" layoutY="26.0" prefHeight="27.0" prefWidth="91.0" promptText="Enter Qty..." />
+                              <Label layoutX="26.0" layoutY="31.0" text="Number of Targets" />
+                              <Label layoutX="26.0" layoutY="147.0" text="Path Length (before)" />
+                              <TextField fx:id="pathLengthBeforeTextField" editable="false" layoutX="154.0" layoutY="142.0" prefHeight="27.0" prefWidth="91.0" />
+                              <TextField fx:id="startingTempTextField" layoutX="152.0" layoutY="301.0" prefHeight="27.0" prefWidth="91.0" text="2000" />
+                              <TextField fx:id="decrementTextField" layoutX="152.0" layoutY="340.0" prefHeight="27.0" prefWidth="91.0" text="0.9" />
+                              <TextField fx:id="maxIterationsTextField" layoutX="152.0" layoutY="378.0" prefHeight="27.0" prefWidth="91.0" text="0" />
+                              <Label layoutX="24.0" layoutY="306.0" text="Starting Temperature" />
+                              <Label layoutX="24.0" layoutY="345.0" text="Decrement" />
+                              <Label layoutX="24.0" layoutY="381.0" text="Max Iterations" />
+                              <Label layoutX="24.0" layoutY="269.0" text="Tunable Parameters">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="pathLengthAfterTextField" editable="false" layoutX="154.0" layoutY="176.0" prefHeight="27.0" prefWidth="91.0" />
+                              <Label layoutX="26.0" layoutY="181.0" text="Path Length (after)" />
+                              <Label layoutX="41.0" layoutY="413.0" prefHeight="63.0" prefWidth="195.0" text="If 'maxIterations' is set to 0, it will use 15 times the number of targets specified." wrapText="true" />
+                              <TextField fx:id="quenchingTempTextField" editable="false" layoutX="153.0" layoutY="210.0" prefHeight="27.0" prefWidth="91.0" />
+                              <Label layoutX="26.0" layoutY="215.0" text="Quenching Temp" />
+                              <Button fx:id="resetButton" layoutX="24.0" layoutY="490.0" mnemonicParsing="false" onAction="#resetToolpath" prefHeight="27.0" prefWidth="89.0" text="Reset" />
                            </children>
                         </AnchorPane>
                      </children>
                   </StackPane>
                </content></Tab>
+          <Tab closable="false" text="8-Puzzle Problem">
+               <content>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <TextField fx:id="goalState11" editable="false" layoutX="383.0" layoutY="140.0" prefHeight="27.0" prefWidth="40.0" text="1" />
+                              <TextField fx:id="goalState12" editable="false" layoutX="383.0" layoutY="167.0" prefHeight="27.0" prefWidth="40.0" text="8" />
+                              <TextField fx:id="goalState13" editable="false" layoutX="383.0" layoutY="194.0" prefHeight="27.0" prefWidth="40.0" text="7" />
+                              <TextField fx:id="goalState21" editable="false" layoutX="423.0" layoutY="140.0" prefHeight="27.0" prefWidth="40.0" text="2" />
+                              <TextField fx:id="goalState22" editable="false" layoutX="423.0" layoutY="167.0" prefHeight="27.0" prefWidth="40.0" text="0" />
+                              <TextField fx:id="goalState23" editable="false" layoutX="423.0" layoutY="194.0" prefHeight="27.0" prefWidth="40.0" text="6" />
+                              <TextField fx:id="goalState31" editable="false" layoutX="463.0" layoutY="140.0" prefHeight="27.0" prefWidth="40.0" text="3" />
+                              <TextField fx:id="goalState32" editable="false" layoutX="463.0" layoutY="167.0" prefHeight="27.0" prefWidth="40.0" text="4" />
+                              <TextField fx:id="goalState33" editable="false" layoutX="463.0" layoutY="194.0" prefHeight="27.0" prefWidth="40.0" text="5" />
+                              <TextField fx:id="startState11" layoutX="148.0" layoutY="143.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState12" layoutX="148.0" layoutY="170.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState13" layoutX="148.0" layoutY="197.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState21" layoutX="188.0" layoutY="143.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState22" layoutX="188.0" layoutY="170.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState23" layoutX="188.0" layoutY="197.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState31" layoutX="228.0" layoutY="143.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState32" layoutX="228.0" layoutY="170.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="startState33" layoutX="228.0" layoutY="197.0" prefHeight="27.0" prefWidth="40.0" />
+                              <Label fx:id="startStateLabel" layoutX="171.0" layoutY="114.0" text="Starting State" />
+                              <Label fx:id="goalStateLabel" layoutX="415.0" layoutY="114.0" text="Goal State" />
+                              <Button fx:id="randomStartButton" layoutX="138.0" layoutY="70.0" mnemonicParsing="false" onAction="#setRandomState" text="Random Starting State" />
+                              <Button fx:id="solvePuzzleButton" layoutX="400.0" layoutY="70.0" mnemonicParsing="false" onAction="#solveButton" text="Solve Puzzle" />
+                              <Label fx:id="solutionListLabel" layoutX="578.0" layoutY="17.0" text="Puzzle Solution Steps" />
+                              <ListView fx:id="solutionListView" layoutX="578.0" layoutY="39.0" prefHeight="469.0" prefWidth="180.0" />
+                              <Button fx:id="upButton" layoutX="114.0" layoutY="233.0" mnemonicParsing="false" onAction="#moveZeroUp" prefHeight="27.0" prefWidth="40.0" text="^" />
+                              <Button fx:id="downButton" layoutX="164.0" layoutY="233.0" mnemonicParsing="false" onAction="#moveZeroDown" prefHeight="27.0" prefWidth="40.0" text="v" />
+                              <Button fx:id="leftButton" layoutX="213.0" layoutY="233.0" mnemonicParsing="false" onAction="#moveZeroLeft" prefHeight="27.0" prefWidth="40.0" text="&lt;" />
+                              <Button fx:id="rightButton" layoutX="263.0" layoutY="233.0" mnemonicParsing="false" onAction="#moveZeroRight" prefHeight="27.0" prefWidth="40.0" text="&gt;" />
+                              <TextField fx:id="upHeuristic" layoutX="114.0" layoutY="272.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="downHeuristic" layoutX="164.0" layoutY="272.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="leftHeuristic" layoutX="213.0" layoutY="272.0" prefHeight="27.0" prefWidth="40.0" />
+                              <TextField fx:id="rightHeuristic" layoutX="263.0" layoutY="272.0" prefHeight="27.0" prefWidth="40.0" />
+                              <Label layoutX="118.0" layoutY="305.0" text="Heuristic Values After Each Move" />
+                              <Label layoutX="54.0" layoutY="340.0" prefHeight="156.0" prefWidth="494.0" text="The number of iterations is limited to 10,000 total. The use of Simulated Annealing (SA) for this problem seems less than ideal. &#10;&#10;SA algorithms are typically used for optimization problems, and I had considerable difficulty understanding exactly how this puzzle could be appropriately solved using SA. &#10;&#10;In any event, the problem attempts to minimize the heuristic value, but often just ends up being in an infinite loop, unable to find a path to the goal state." wrapText="true" />
+                           </children>
+                        </AnchorPane>
+                     </children></StackPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </center>
@@ -91,7 +113,7 @@
               <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeApp" text="Close" />
             </items>
           </Menu>
-          <Menu fx:id="actionsMenu" mnemonicParsing="false" text="Actions">
+          <Menu fx:id="actionsMenu" disable="true" mnemonicParsing="false" text="Actions">
             <items>
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="puzzleMenuLabel" disable="true" mnemonicParsing="false" text="8-Puzzle Problem" />

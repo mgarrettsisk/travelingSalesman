@@ -9,7 +9,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.LinkedList;
 
 public class mainController {
     //------------------------------------------------------------------------------------------------------------------
@@ -34,6 +37,7 @@ public class mainController {
     //------------------------------------------------------------------------------------------------------------------
     //                                               ATTRIBUTES
     //------------------------------------------------------------------------------------------------------------------
+    // for 8-Puzzle Problem
     public TextField startState11;
     public TextField startState21;
     public TextField startState31;
@@ -53,12 +57,20 @@ public class mainController {
     public TextField rightHeuristic;
     public ListView<String> solutionListView;
     public puzzle workingPuzzle = new puzzle();
-
+    // For Shortest Toolpath Problem
     public Button randomArrangementButton;
     public Button solveToolpathButton;
     public Canvas toolpathCanvas;
+    public GraphicsContext gc;
     public TextField targetQuantity;
     public toolpathOptimizer toolpath = new toolpathOptimizer();
+    public TextField pathLengthBeforeTextField;
+    public TextField pathLengthAfterTextField;
+    public TextField quenchingTempTextField;
+    public TextField startingTempTextField;
+    public TextField decrementTextField;
+    public TextField maxIterationsTextField;
+    public Button resetButton;
     //------------------------------------------------------------------------------------------------------------------
     //                                          EVENT HANDLER METHODS
     //------------------------------------------------------------------------------------------------------------------
@@ -95,11 +107,50 @@ public class mainController {
         int quantity = Integer.parseInt(targetQuantity.getText());
         double maxWidth = toolpathCanvas.getWidth();
         double maxHeight = toolpathCanvas.getWidth();
+        gc = toolpathCanvas.getGraphicsContext2D();
         toolpath.generateRandomTargets(quantity, (int)maxWidth, (int)maxHeight);
+        LinkedList<toolpathOptimizer.target> drawTargets = toolpath.getTargetList();
+        clearCanvas(gc);
+        for (int i = 0; i < drawTargets.size(); i++) {
+            drawTarget(gc, drawTargets.get(i));
+            if (i == (drawTargets.size()-1)) {
+                drawPath(gc,drawTargets.getLast(), drawTargets.getFirst());
+            } else {
+                drawPath(gc,drawTargets.get(i), drawTargets.get(i+1));
+            }
+        }
+        randomArrangementButton.setDisable(true);
     }
     public void solveToolpath() {
         // handler method that optimizes the toolpath
-        toolpath.optimize();
+        showToolpath(pathLengthBeforeTextField);
+        double startTemp = Double.parseDouble(startingTempTextField.getText());
+        double userDecrement = Double.parseDouble(decrementTextField.getText());
+        int userIterations = Integer.parseInt(maxIterationsTextField.getText());
+        double quenchingTemperature = toolpath.optimize(startTemp, userDecrement, userIterations);
+        LinkedList<toolpathOptimizer.target> drawTargets = toolpath.getTargetList();
+        clearCanvas(gc);
+        for (int i = 0; i < drawTargets.size(); i++) {
+            drawTarget(gc, drawTargets.get(i));
+            if (i == (drawTargets.size()-1)) {
+                drawPath(gc,drawTargets.getLast(), drawTargets.getFirst());
+            } else {
+                drawPath(gc,drawTargets.get(i), drawTargets.get(i+1));
+            }
+        }
+        showToolpath(pathLengthAfterTextField);
+        quenchingTempTextField.setText(Double.toString(quenchingTemperature));
+    }
+    public void resetToolpath() {
+        // event handler to call the reset method of the toolpath optimizer
+        toolpath.reset();
+        targetQuantity.clear();
+        targetQuantity.setPromptText("Enter Qty...");
+        randomArrangementButton.setDisable(false);
+        clearCanvas(gc);
+        pathLengthBeforeTextField.clear();
+        pathLengthAfterTextField.clear();
+        quenchingTempTextField.clear();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -125,9 +176,21 @@ public class mainController {
     }
     private void drawTarget(GraphicsContext contextInput, toolpathOptimizer.target inputTarget) {
         // this method takes a target object as input and draws a circle on the input canvas graphics context.
+        contextInput.setFill(Color.BLUE);
+        contextInput.fillOval(inputTarget.getXpos()-5, inputTarget.getYpos()-5, 10,10);
     }
     private void drawPath(GraphicsContext contextInput, toolpathOptimizer.target source, toolpathOptimizer.target destination) {
         // method takes two targets as input and draws a line between them to represent the path
+        contextInput.setStroke(Color.RED);
+        contextInput.strokeLine(source.getXpos(), source.getYpos(), destination.getXpos(), destination.getYpos());
+    }
+    private void clearCanvas(GraphicsContext inputCanvas) {
+        // this method clears the canvas such as to prevent over writing of imagery from different parts of the program
+        gc.clearRect(0, 0, toolpathCanvas.getWidth(), toolpathCanvas.getHeight());
+    }
+    private void showToolpath(TextField outputField) {
+        // method to display toolpath of current path in GUI
+        outputField.setText((Double.toString(toolpath.getPathlength())));
     }
     //------------------------------------------------------------------------------------------------------------------
     //                                     END OF CLASS mainController.java

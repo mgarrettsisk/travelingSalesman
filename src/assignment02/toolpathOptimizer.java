@@ -38,6 +38,7 @@ public class toolpathOptimizer {
             int randomX = rand.nextInt(xMax+1);
             int randomY = rand.nextInt(yMax+1);
             targetList.add(new target(randomX, randomY));
+            System.out.println("Created random object at X = " + randomX + ", and Y = " + randomY);
         }
     }
     public void addTarget(target inputTarget) {
@@ -52,56 +53,82 @@ public class toolpathOptimizer {
         // returns the path length of the entire target list
         return this.pathLength();
     }
-    public void optimize() {
+    public double optimize(double startingTempInput, double decrementInput, int maxIterationsInput) {
         // method that sorts the target list in order of traversal in order to minimize the total length of travel over
         // the course of the tool path process. The method uses a simulated annealing search algorithm to achieve a near
         // optimal result. The method
 
         // set pertinent variables and parameters
-        int maxIterations = targetList.size()*15;
+        int maxIterations;
+        if (maxIterationsInput == 0) {
+            maxIterations = targetList.size()*10;
+        } else {
+            maxIterations = maxIterationsInput;
+        }
         int iteration = 0;
         int successfulMoves = 0;
-        double decrement = 0.9;
-        double currentTemp = 2000.0;
+        double currentTemp = startingTempInput;
 
         boolean continueSearch = true;
 
         while (continueSearch) {
+            System.out.println("\n------------- LOOP INSTANCE START --------------------");
+            System.out.println("Entered the loop, on iteration: " + iteration);
+            System.out.println("Temperature: " + currentTemp);
             iteration++;
             // compute the current path length
             double currentLength = pathLength();
+            System.out.println("Path Length Before Swap: " + currentLength);
             // swap two targets in the list
             int[] pairSwap = randomIndices(targetList.size());
+            System.out.println("Target List Size: " + targetList.size());
+            System.out.println("Pair Swap Indices: " + pairSwap[0] + " and " + pairSwap[1]);
             swapTwoRandomTargets(pairSwap[0], pairSwap[1]);
             // compute the new path length
             double nextLength = pathLength();
+            System.out.println("Path Length After Swap: " + nextLength);
             // compute delta
             double delta = currentLength - nextLength;
+            System.out.println("Delta is: " + delta);
             // start optimization checks
             if (delta > 0) {
                 // keep the move and take note
                 successfulMoves++;
+                System.out.println("Successful Move, delta: " + delta);
+                System.out.println("Successful Moves: " + successfulMoves);
             } else if (delta <= 0) {
                 Random rand = new Random();
                 double randValue = rand.nextInt(100)/100.0;
+                System.out.println("Random Value: " + randValue);
                 double tempValue = Math.exp((-delta/currentTemp));
-                if (randValue < tempValue) {
+                System.out.println("Temp Value: " + tempValue);
+                if (randValue > tempValue) {
                     // keep the move, but not count it as "successful"
+                    System.out.println("Chose to keep the bad move");
                 } else {
                     // reject the move and undo it
                     swapTwoRandomTargets(pairSwap[0], pairSwap[1]);
+                    System.out.println("Did not keep bad move.");
                 }
             }
             // change the temperature on a set pattern (every 10 successful moves) and reset iteration count
-            if ((successfulMoves%10 == 0) || (iteration == maxIterations)) {
-                currentTemp = currentTemp * decrement;
+            if (iteration == maxIterations) {
+                System.out.println("Successful Moves: " + successfulMoves);
+                currentTemp = currentTemp * decrementInput;
+                System.out.println("Iteration before reset: " + iteration);
                 iteration = 0;
+                if (successfulMoves == 0) {
+                    continueSearch = false;
+                }
+                successfulMoves = 0;
             }
-            // a check to see if there are any additional "successful moves" made for an iteration scheme
-            if (iteration == maxIterations && successfulMoves == 0) {
-                continueSearch = false;
-            }
+            System.out.println("------------- LOOP INSTANCE END --------------------\n");
         }
+        return currentTemp;
+    }
+    public void reset(){
+        // this method clears the target list back to its original state
+        targetList.clear();
     }
     //------------------------------------------------------------------------------------------------------------------
     //                                                PRIVATE METHODS
@@ -138,8 +165,8 @@ public class toolpathOptimizer {
     private void swapTwoRandomTargets(int indexOne, int indexTwo) {
         // this method swaps the location of two targets within the target list.
         target workingTarget = targetList.get(indexOne);
-        targetList.add(indexOne,targetList.get(indexTwo));
-        targetList.add(indexTwo,workingTarget);
+        targetList.set(indexOne,targetList.get(indexTwo));
+        targetList.set(indexTwo,workingTarget);
     }
     //------------------------------------------------------------------------------------------------------------------
     //                                              INNER CLASS(ES)

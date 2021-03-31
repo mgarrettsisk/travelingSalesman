@@ -101,107 +101,158 @@ public class puzzle {
     public LinkedList<String> solvePuzzle(double startingTemp, double decrement) {
         // this method uses simulated annealing to solve the puzzle from a given state. It returns an array list of
         // steps used to solve the problem
-        System.out.println("Has entered the function solvePuzzle");
+        //System.out.println("Has entered the function solvePuzzle");
         LinkedList<String> solutionStack = new LinkedList<>();
         double currentTemp = startingTemp;
-        int maxIterations = 10000;
+        int maxIterations = 100000;
         int iterations = 0;
 
-        System.out.println("About to enter the while loop");
         while (!(Arrays.deepEquals(this.puzzleState,this.solutionState))&& iterations < maxIterations) {
+            System.out.println("------------------ ENTERING THE WHILE LOOP -------------------");
             System.out.println("The current iteration is: " + iterations);
+
+            // get the possible moves of the square containing '0'
             String[] moves = getPossibleMoves();
+            System.out.println("Possible Moves: { " + moves[0] + ", " + moves[1] + ", " + moves[2] +
+                    ", " + moves[3]);
+
+            // among the possibilities, choose one at random
+            int randomChoice = -1;
             Random rNumber = new Random();
-            int randomChoice = rNumber.nextInt(4) + 1;
+            int randomNumber = rNumber.nextInt(8) + 1;
+            int[] nextMinimum = nextHeuristics();
+            System.out.println("Random move selection = " + randomNumber);
+            if ((randomNumber > 4) && (nextMinimum[4] != -1)) {
+                randomChoice = nextMinimum[nextMinimum[4]];
+            } else {
+                randomChoice = randomNumber;
+            }
+            System.out.println("Randome Choice Number: " + randomChoice);
             switch (randomChoice) {
                 case 1:
+                    // Choosing "up" move
+                    System.out.println("Up Move Attempted");
                     if (moves[0].equalsIgnoreCase("up")) {
                         int currentValue = currentHeuristic();
+                        System.out.println("Current heuristic: " + currentValue);
                         moveUp();
                         int nextValue = currentHeuristic();
-                        int delta = nextValue - currentValue;
-                        if (delta < 0) {
+                        System.out.println("Next heuristic: " + nextValue);
+                        int delta = currentValue - nextValue;
+                        System.out.println("Delta: " + delta);
+                        if (delta > 0) {
                             // keep the move
                             solutionStack.push("Move Zero Up");
-                        } else if (delta >= 0){
+                            System.out.println("Successful Move");
+                        } else if (delta <= 0){
+                            System.out.println("Unsuccessful Move");
                             Random rand = new Random();
                             double randValue = rand.nextInt(100)/100.0;
                             double tempValue = Math.exp(-delta/startingTemp);
                             if (randValue < tempValue) {
                                 // keep the move
                                 solutionStack.push("Move Zero Up");
+                                System.out.println("Unsuccessful Move Kept");
                             } else {
                                 // reject the move
                                 moveDown();
+                                System.out.println("Unsuccessful Move Rejected");
                             }
                         }
                     }
                     break;
                 case 2:
+                    // Choosing "down" move
+                    System.out.println("Down Move Attempted");
                     if (moves[1].equalsIgnoreCase("down")) {
                         int currentValue = currentHeuristic();
+                        System.out.println("Current heuristic: " + currentValue);
                         moveDown();
                         int nextValue = currentHeuristic();
-                        int delta = nextValue - currentValue;
-                        if (delta < 0) {
+                        System.out.println("Next heuristic: " + nextValue);
+                        int delta = currentValue - nextValue;
+                        System.out.println("Delta: " + delta);
+                        if (delta > 0) {
                             // keep the move
                             solutionStack.push("Move Zero Down");
-                        } else if (delta >= 0){
+                            System.out.println("Successful Move");
+                        } else if (delta <= 0){
+                            System.out.println("Unsuccessful Move");
                             Random rand = new Random();
                             double randValue = rand.nextInt(100)/100.0;
                             double tempValue = Math.exp(-delta/startingTemp);
                             if (randValue < tempValue) {
                                 // keep the move
                                 solutionStack.push("Move Zero Down");
+                                System.out.println("Unsuccessful Move Kept");
                             } else {
                                 // reject the move
                                 moveUp();
+                                System.out.println("Unsuccessful Move Rejected");
                             }
                         }
                     }
                     break;
                 case 3:
+                    // Choosing "left" move
+                    System.out.println("Left Move Attempted");
                     if (moves[2].equalsIgnoreCase("left")) {
                         int currentValue = currentHeuristic();
+                        System.out.println("Current heuristic: " + currentValue);
                         moveLeft();
                         int nextValue = currentHeuristic();
-                        int delta = nextValue - currentValue;
-                        if (delta < 0) {
+                        System.out.println("Next heuristic: " + nextValue);
+                        int delta = currentValue - nextValue;
+                        System.out.println("Delta: " + delta);
+                        if (delta > 0) {
                             // keep the move
                             solutionStack.push("Move Zero Left");
-                        } else if (delta >= 0){
+                            System.out.println("Successful Move");
+                        } else if (delta <= 0){
+                            System.out.println("Unsuccessful Move");
                             Random rand = new Random();
                             double randValue = rand.nextInt(100)/100.0;
                             double tempValue = Math.exp(-delta/startingTemp);
                             if (randValue < tempValue) {
                                 // keep the move
                                 solutionStack.push("Move Zero Left");
+                                System.out.println("Unsuccessful Move Kept");
                             } else {
                                 // reject the move
                                 moveRight();
+                                System.out.println("Unsuccessful Move Rejected");
                             }
                         }
                     }
                     break;
                 case 4:
+                    // Choosing "right" move
+                    System.out.println("Right Move Attempted");
                     if (moves[3].equalsIgnoreCase("right")) {
                         int currentValue = currentHeuristic();
+                        System.out.println("Current heuristic: " + currentValue);
                         moveRight();
                         int nextValue = currentHeuristic();
-                        int delta = nextValue - currentValue;
-                        if (delta < 0) {
+                        System.out.println("Next heuristic: " + nextValue);
+                        int delta = currentValue - nextValue;
+                        System.out.println("Delta: " + delta);
+                        if (delta > 0) {
                             // keep the move
                             solutionStack.push("Move Zero Right");
-                        } else if (delta >= 0){
+                            System.out.println("Successful Move");
+                        } else if (delta <= 0){
+                            System.out.println("Unsuccessful Move");
                             Random rand = new Random();
                             double randValue = rand.nextInt(100)/100.0;
                             double tempValue = Math.exp(-delta/startingTemp);
                             if (randValue < tempValue) {
                                 // keep the move
                                 solutionStack.push("Move Zero Right");
+                                System.out.println("Unsuccessful Move Kept");
                             } else {
                                 // reject the move
                                 moveLeft();
+                                System.out.println("Unsuccessful Move Rejected");
                             }
                         }
                     }
@@ -210,8 +261,9 @@ public class puzzle {
                     // do nothing
             }
             iterations++;
-            if (iterations % 100 == 0) {
+            if ((iterations != 0) && iterations % 100 == 0) {
                 currentTemp = currentTemp * decrement;
+                System.out.println("Temperature decreased to: " + currentTemp);
             }
         }
         return solutionStack;
@@ -245,8 +297,8 @@ public class puzzle {
             // location is on first or second column, thus a "right" (direction) is possible
             possibleMoves[3] = "right";
         }
-        System.out.println("Possible Moves are:\n");
-        System.out.println(possibleMoves[0] + ", " + possibleMoves[1] + ", " + possibleMoves[2] + ", " + possibleMoves[3] + "\n");
+        //System.out.println("Possible Moves are:\n");
+        //System.out.println(possibleMoves[0] + ", " + possibleMoves[1] + ", " + possibleMoves[2] + ", " + possibleMoves[3] + "\n");
         return possibleMoves;
     }
 
@@ -262,8 +314,8 @@ public class puzzle {
                 }
             }
         }
-        System.out.println("The cell with value " + inputValue + " is located at X = " + outputCoordinates[0] + ", " +
-                "and Y = " + outputCoordinates[1] + ".");
+        //System.out.println("The cell with value " + inputValue + " is located at X = " + outputCoordinates[0] + ", " +
+                //"and Y = " + outputCoordinates[1] + ".");
         return outputCoordinates;
     }
 

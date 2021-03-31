@@ -35,10 +35,15 @@ public class toolpathOptimizer {
         // this method takes an integer as an input and generates a number of targets within the specified canvas
         Random rand = new Random();
         for (int i = 0; i < quantity; i++) {
-            int randomX = rand.nextInt(xMax+1);
-            int randomY = rand.nextInt(yMax+1);
-            targetList.add(new target(randomX, randomY));
-            System.out.println("Created random object at X = " + randomX + ", and Y = " + randomY);
+            if (i == 0) {
+                // initial target is always the "Home Point" of (0,0). This remains unchanged throughout the program
+                targetList.add(new target(0,0));
+            } else {
+                // all other targets are randomly generated
+                int randomX = rand.nextInt(xMax+1);
+                int randomY = rand.nextInt(yMax+1);
+                targetList.add(new target(randomX, randomY));
+            }
         }
     }
     public void addTarget(target inputTarget) {
@@ -158,8 +163,9 @@ public class toolpathOptimizer {
         // returns an array of two indices that will be used to swap
         int[] outputArray = {-1,-1};
         Random rand = new Random();
-        outputArray[0] = rand.nextInt(limit);
-        outputArray[1] = rand.nextInt(limit);
+        // the random outputs are offset by 1 in order to prevent an index of 0
+        outputArray[0] = rand.nextInt(limit - 1) + 1;
+        outputArray[1] = rand.nextInt(limit - 1) + 1;
         return outputArray;
     }
     private void swapTwoRandomTargets(int indexOne, int indexTwo) {

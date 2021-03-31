@@ -99,8 +99,9 @@ public class mainController {
     public void solveButton() {
         ObservableList<String> visibleList;
         visibleList = FXCollections.observableArrayList();
-        visibleList.setAll(workingPuzzle.solvePuzzle(2000, 0.9));
+        visibleList.setAll(workingPuzzle.solvePuzzle(20000, 0.95));
         solutionListView.setItems(visibleList);
+        drawGrid();
     }
     public void generateTargets() {
         // handler method that generates a set number of targets
@@ -111,8 +112,9 @@ public class mainController {
         toolpath.generateRandomTargets(quantity, (int)maxWidth, (int)maxHeight);
         LinkedList<toolpathOptimizer.target> drawTargets = toolpath.getTargetList();
         clearCanvas(gc);
-        for (int i = 0; i < drawTargets.size(); i++) {
-            drawTarget(gc, drawTargets.get(i));
+        drawTarget(gc, drawTargets.get(0), Color.GREEN);
+        for (int i = 1; i < drawTargets.size(); i++) {
+            drawTarget(gc, drawTargets.get(i), Color.BLUE);
             if (i == (drawTargets.size()-1)) {
                 drawPath(gc,drawTargets.getLast(), drawTargets.getFirst());
             } else {
@@ -130,8 +132,9 @@ public class mainController {
         double quenchingTemperature = toolpath.optimize(startTemp, userDecrement, userIterations);
         LinkedList<toolpathOptimizer.target> drawTargets = toolpath.getTargetList();
         clearCanvas(gc);
-        for (int i = 0; i < drawTargets.size(); i++) {
-            drawTarget(gc, drawTargets.get(i));
+        drawTarget(gc, drawTargets.get(0), Color.GREEN);
+        for (int i = 1; i < drawTargets.size(); i++) {
+            drawTarget(gc, drawTargets.get(i), Color.BLUE);
             if (i == (drawTargets.size()-1)) {
                 drawPath(gc,drawTargets.getLast(), drawTargets.getFirst());
             } else {
@@ -174,9 +177,9 @@ public class mainController {
         leftHeuristic.setText(Integer.toString(nextValues[2]));
         rightHeuristic.setText(Integer.toString(nextValues[3]));
     }
-    private void drawTarget(GraphicsContext contextInput, toolpathOptimizer.target inputTarget) {
+    private void drawTarget(GraphicsContext contextInput, toolpathOptimizer.target inputTarget, Color colorInput) {
         // this method takes a target object as input and draws a circle on the input canvas graphics context.
-        contextInput.setFill(Color.BLUE);
+        contextInput.setFill(colorInput);
         contextInput.fillOval(inputTarget.getXpos()-5, inputTarget.getYpos()-5, 10,10);
     }
     private void drawPath(GraphicsContext contextInput, toolpathOptimizer.target source, toolpathOptimizer.target destination) {
